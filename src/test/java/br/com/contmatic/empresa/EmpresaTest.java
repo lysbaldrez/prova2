@@ -238,5 +238,11 @@ public class EmpresaTest {
 		Empresa empresa = new Empresa();
 		assertNotEquals(empresa.toString(), null);
 	}
+	@Test
+    public void deve_testar_JodaTime() {
+        Empresa empresa = new Empresa();
+        empresa.isAfterPayDay(null);
+        assertEquals(null, empresa.isAfterPayDay(null));
+    }
 	
 }

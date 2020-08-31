@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.joda.time.DateTime;
 
 public class Empresa {
 
@@ -21,6 +22,14 @@ public class Empresa {
     private String situacaoEspecial;
     private String data2;  
 
+    
+    public  boolean isAfterPayDay ( DateTime datetime) {
+        if (datetime.getMonthOfYear () == 2 ) {    // Fevereiro é o mês 2 !! 
+         return datetime.getDayOfMonth ()> 26 ;
+       }
+       return datetime.getDayOfMonth ()> 28 ;
+     }
+    
     public String getNomeFantasia() {
         return nomeFantasia;
     }
