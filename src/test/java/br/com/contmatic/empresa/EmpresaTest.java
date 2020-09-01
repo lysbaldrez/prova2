@@ -10,10 +10,17 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import br.com.six2six.fixturefactory.Fixture;
+import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 
 public class EmpresaTest {
 
@@ -160,9 +167,9 @@ public class EmpresaTest {
 	@Test
 	public void deve_testar_cnpj_iguais() {
 		Empresa empresa = new Empresa();
-		empresa.setCnpj("26.870.272/0001-36");
+		empresa.setCnpj("26870272/0001-36");
 		Empresa empresa2 = new Empresa();
-		empresa2.setCnpj("26.870.272/0001-36");
+		empresa2.setCnpj("26870272/0001-36");
 		assertThat(empresa.equals(empresa2), is(true));
 		assertTrue(empresa.hashCode() == empresa2.hashCode());
 
@@ -244,5 +251,18 @@ public class EmpresaTest {
         empresa.isAfterPayDay(null);
         assertEquals(null, empresa.isAfterPayDay(null));
     }
+	
+	@Test
+	public void teste_fixturefactory () {
+	    FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa.clienttemplate.loader");
+        Empresa empresa = Fixture.from(Empresa.class).gimme("empresa");
+        javax.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Empresa>> violations = validator.validate(empresa);
+        if (!violations.isEmpty()) {
+            System.out.println("Inválido");
+        }
+	}
+	
+	
 	
 }

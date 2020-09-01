@@ -3,8 +3,16 @@ package br.com.contmatic.empresa;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+
 import org.junit.Ignore;
 import org.junit.Test;
+
+import br.com.six2six.fixturefactory.Fixture;
+import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 
 public class FuncionarioTest {
 
@@ -84,7 +92,7 @@ public class FuncionarioTest {
 		funcionario.setCpf("885.082.875-11");
 		Funcionario funcionario1 = new Funcionario();
 		funcionario1.setCpf("885.082.875-11");
-		assertThat(funcionario.equals(funcionario1), is(true));
+		assertThat(funcionario.getCpf().equals(funcionario1.getCpf()), is(true));
 		assertTrue(funcionario.hashCode() == funcionario1.hashCode());
 
 	}
@@ -144,4 +152,14 @@ public class FuncionarioTest {
 		assertThat(funcionario.equals(empresa), is(false));
 
 	}
+	@Test
+    public void teste_fixturefactory () {
+        FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa.clienttemplate.loader");
+        Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
+        javax.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Funcionario>> violations = validator.validate(funcionario);
+        if (!violations.isEmpty()) {
+            System.out.println("Inválido");
+        }
+    }
 }

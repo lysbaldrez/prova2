@@ -3,11 +3,19 @@ package br.com.contmatic.empresa;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import br.com.six2six.fixturefactory.Fixture;
+import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EnderecoTest {
@@ -150,5 +158,16 @@ public class EnderecoTest {
 		assertFalse(endereco.hashCode() == endereco2.hashCode());
 
 	}
+	
+	@Test
+    public void teste_fixturefactory () {
+        FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa.clienttemplate.loader");
+        Endereco endereco = Fixture.from(Endereco.class).gimme("endereco");
+        javax.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Endereco>> violations = validator.validate(endereco);
+        if (!violations.isEmpty()) {
+            System.out.println("Inválido");
+        }
+    }
 
 }
