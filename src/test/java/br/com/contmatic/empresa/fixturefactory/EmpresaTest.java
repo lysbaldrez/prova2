@@ -13,8 +13,8 @@ public class EmpresaTest {
 
     @Test
     public void test() {
-        FixtureFactoryLoader.loadTemplates("EmpresaTemplateFixtureFactory");
-        Empresa empresa = Fixture.from(EmpresaTemplateFixtureFactory.class).gimme("valid");
+        FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa");
+        Empresa empresa = Fixture.from(EmpresaTemplateFixtureFactory.class).gimme("valido");
         empresa.setCnpj(null);
         Empresa empresa2 = new Empresa();
         empresa2.setCnpj("26.870.272/0001-36");

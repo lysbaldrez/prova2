@@ -1,6 +1,10 @@
 package br.com.contmatic.empresa;
 
+import java.util.HashSet;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -8,6 +12,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
 public class Empresa {
+    
+    @NotNull (message = "Nome fantasia deve ser informado")
+    @Size(min = 3, max = 20)
 
     private String nome;
     private String nomeFantasia;
@@ -21,6 +28,7 @@ public class Empresa {
     private String email;
     private String situacaoEspecial;
     private String data2;  
+    private HashSet <Endereco> endereco;
 
     
     public  boolean isAfterPayDay ( DateTime datetime) {
