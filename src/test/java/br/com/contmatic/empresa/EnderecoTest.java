@@ -169,5 +169,17 @@ public class EnderecoTest {
             System.out.println("Inválido");
         }
     }
+	@Test
+    public void validation () {
+        Endereco endereco = new Endereco(); 
+        endereco.setCep("XXXXXXXXXXX"); 
+
+        javax.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
+        Set<ConstraintViolation<Endereco>> violations = validator.validate(endereco);
+
+        if(!violations.isEmpty())
+            System.err.println("Existem documentos inválidos");
+    }
 
 }

@@ -3,28 +3,34 @@ package br.com.contmatic.empresa;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.br.CNPJ;
 import org.joda.time.DateTime;
 
 public class Empresa {
     
-    @NotNull (message = "Nome fantasia deve ser informado")
-    @Size(min = 3, max = 20)
 
+    @NotBlank(message = "Nome não pode estar em branco")
     private String nome;
+    
     private String nomeFantasia;
+    @CNPJ
     private String cnpj;
+    
     private String tipoDeEmpresa;
     private String porteDaEmpresa;
     private List<Funcionario> funcionarios;
     private String situacaoCadastral;
     private String data;
     private String telefone;
+    @Email
     private String email;
     private String situacaoEspecial;
     private String data2;  

@@ -162,4 +162,16 @@ public class FuncionarioTest {
             System.out.println("Inválido");
         }
     }
+	@Test
+    public void validation () {
+	    Funcionario funcionario = new Funcionario(); 
+        funcionario.setCpf("XXXXXXXXXXX"); 
+
+        javax.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
+        Set<ConstraintViolation<Funcionario>> violations = validator.validate(funcionario);
+
+        if(!violations.isEmpty())
+            System.err.println("Existem documentos inválidos");
+    }
 }

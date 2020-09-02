@@ -14,6 +14,7 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
+import javax.xml.bind.Validator;
 
 import org.junit.After;
 import org.junit.Before;
@@ -263,6 +264,20 @@ public class EmpresaTest {
         }
 	}
 	
+	@Test
+	public void validation () {
+	    Empresa empresa = new Empresa(); 
+	    empresa.setCnpj("XXXXXXXXXXX"); 
+
+	    javax.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
+	    Set<ConstraintViolation<Empresa>> violations = validator.validate(empresa);
+
+	    if(!violations.isEmpty()) {
+	        System.err.println("Existem documentos inválidos");
+	    }
+	    
+	}
 	
 	
 }

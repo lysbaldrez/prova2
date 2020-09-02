@@ -1,12 +1,20 @@
 package br.com.contmatic.empresa;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.br.CPF;
 
 public class Funcionario {
+    
+    @NotBlank(message = "Nome não pode estar em branco")
 	private String nome;
+    
 	private String idade;
+	@CPF
 	private String cpf;
 	private String cargo;
 	private String date;
