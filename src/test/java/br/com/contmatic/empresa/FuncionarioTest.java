@@ -8,14 +8,42 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FuncionarioTest.
+ */
 public class FuncionarioTest {
 
+    /**
+     * Check argument.
+     *
+     * @param b the b
+     * @param string the string
+     */
+    private void checkArgument(boolean b, String string) {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    /**
+     * Set up.
+     */
+    @Before
+    public final void setUp() {
+        FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa.clienttemplate.loader");
+        Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
+    }
+    
+	/**
+	 * Deve testar nome.
+	 */
 	@Test
 	public void deve_testar_nome() {
 		Funcionario funcionario = new Funcionario();
@@ -23,6 +51,9 @@ public class FuncionarioTest {
 		assertEquals("Raimundo", funcionario.getNome());
 	}
 
+	/**
+	 * Deve testar idade.
+	 */
 	@Test
 	public void deve_testar_idade() {
 		Funcionario funcionario = new Funcionario();
@@ -31,6 +62,9 @@ public class FuncionarioTest {
 
 	}
 
+	/**
+	 * Deve testar cpf.
+	 */
 	@Test
 	public void deve_testar_cpf() {
 		Funcionario funcionario = new Funcionario();
@@ -38,6 +72,9 @@ public class FuncionarioTest {
 		assertEquals("885.082.875-11", funcionario.getCpf());
 	}
 
+	/**
+	 * Deve testar cargo.
+	 */
 	@Test
 	public void deve_testar_cargo() {
 		Funcionario funcionario = new Funcionario();
@@ -45,12 +82,15 @@ public class FuncionarioTest {
 		assertEquals("Analista", funcionario.getCargo());
 		Funcionario funcionario2 = new Funcionario();
 		funcionario2.setCargo("Analista");
-		assertEquals("Analista", funcionario.getCargo());
-		assertThat(funcionario.equals(funcionario2), is(true));
+		assertEquals("Analista", funcionario2.getCargo());
+		assertTrue(funcionario.equals(funcionario2));
 		assertTrue(funcionario.hashCode() == funcionario2.hashCode());
 
 	}
 
+	/**
+	 * Testar outro cpf.
+	 */
 	@Test
 	public void testar_outro_cpf_() {
 		Funcionario funcionario = new Funcionario();
@@ -59,6 +99,9 @@ public class FuncionarioTest {
 
 	}
 
+	/**
+	 * Deve testar data.
+	 */
 	@Test
 	public void deve_testar_data() {
 		Funcionario funcionario = new Funcionario();
@@ -67,6 +110,9 @@ public class FuncionarioTest {
 
 	}
 
+	/**
+	 * Deve testar empresa e funcionario.
+	 */
 	@Test
 	public void deve_testar_empresa_e_funcionario() {
 		Empresa empresa = new Empresa();
@@ -77,6 +123,9 @@ public class FuncionarioTest {
 
 	}
 
+	/**
+	 * Deve atribuir cargonulo.
+	 */
 	@Ignore("Teste desnecessário")
 	@Test
 	public void deve_atribuir_cargonulo() {
@@ -86,6 +135,9 @@ public class FuncionarioTest {
 		assertThat(funcionario.getCargo(), (null));
 	}
 
+	/**
+	 * Deve testar cpf iguais.
+	 */
 	@Test
 	public void deve_testar_cpf_iguais() {
 		Funcionario funcionario = new Funcionario();
@@ -97,12 +149,18 @@ public class FuncionarioTest {
 
 	}
 
+	/**
+	 * Nao deve retornar tostring nulo.
+	 */
 	@Test
 	public void nao_deve_retornar_tostring_nulo() {
 		Funcionario funcionario = new Funcionario();
 		assertNotEquals(funcionario.toString(), null);
 	}
 
+	/**
+	 * Testar doisobjetos.
+	 */
 	@Test
 	public void testar_doisobjetos() {
 		Funcionario funcionario = new Funcionario();
@@ -110,6 +168,9 @@ public class FuncionarioTest {
 		assertEquals(funcionario, funcionario1);
 	}
 
+	/**
+	 * Testar null.
+	 */
 	@Test
 	public void testar_null() {
 		Funcionario funcionario = new Funcionario();
@@ -117,6 +178,9 @@ public class FuncionarioTest {
 		assertNotEquals(funcionario, funcionario1);
 	}
 
+	/**
+	 * Testar dois objetos nulo.
+	 */
 	@Test
 	public void testar_dois_objetos_nulo() {
 		Funcionario funcionario = new Funcionario();
@@ -126,6 +190,9 @@ public class FuncionarioTest {
 		assertEquals(funcionario, funcionario1);
 	}
 
+	/**
+	 * Testar um objeto nulo.
+	 */
 	@Test
 	public void testar_um_objeto_nulo() {
 		Funcionario funcionario = new Funcionario();
@@ -135,6 +202,9 @@ public class FuncionarioTest {
 		assertNotEquals(funcionario, funcionario1);
 	}
 
+	/**
+	 * Testar cpfs diferentes.
+	 */
 	@Test
 	public void testar_cpfs_diferentes() {
 		Funcionario funcionario = new Funcionario();
@@ -144,6 +214,9 @@ public class FuncionarioTest {
 		assertNotEquals(funcionario, funcionario1);
 	}
 
+	/**
+	 * Testar classes diferentes.
+	 */
 	@Test
 	public void testar_classes_diferentes() {
 		Funcionario funcionario = new Funcionario();
@@ -152,16 +225,21 @@ public class FuncionarioTest {
 		assertThat(funcionario.equals(empresa), is(false));
 
 	}
+	
+	/**
+	 * Teste fixturefactory.
+	 */
 	@Test
     public void teste_fixturefactory () {
-        FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa.clienttemplate.loader");
-        Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
+	    Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
         javax.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<Funcionario>> violations = validator.validate(funcionario);
-        if (!violations.isEmpty()) {
-            System.out.println("Inválido");
-        }
+        assertTrue(!violations.isEmpty());
     }
+	
+	/**
+	 * Validation.
+	 */
 	@Test
     public void validation () {
 	    Funcionario funcionario = new Funcionario(); 
@@ -171,7 +249,7 @@ public class FuncionarioTest {
 
         Set<ConstraintViolation<Funcionario>> violations = validator.validate(funcionario);
 
-        if(!violations.isEmpty())
-            System.err.println("Existem documentos inválidos");
-    }
+        checkArgument(!violations.isEmpty(), "Existem documentos inválidos");
+
+	}
 }

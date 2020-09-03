@@ -17,19 +17,43 @@ import org.junit.runners.MethodSorters;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EnderecoTest.
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EnderecoTest {
 
+	/**
+	 * Before.
+	 */
 	@BeforeClass
 	public static void before() {
 		System.out.println("Iniciando os testes");
 	}
 
+	/**
+	 * After.
+	 */
 	@AfterClass
 	public static void after() {
 		System.out.println(" Terminando os testes");
 	}
 
+	 /**
+ 	 * Check argument.
+ 	 *
+ 	 * @param b the b
+ 	 * @param string the string
+ 	 */
+ 	private void checkArgument(boolean b, String string) {
+	        // TODO Auto-generated method stub
+	        
+	    }
+	
+	/**
+	 * Deve testar cep.
+	 */
 	@Test
 	public void deve_testar_cep() {
 		Endereco endereco = new Endereco();
@@ -38,6 +62,9 @@ public class EnderecoTest {
 
 	}
 
+	/**
+	 * Deve testar cidade.
+	 */
 	@Test
 	public void deve_testar_cidade() {
 		Endereco endereco = new Endereco();
@@ -45,6 +72,9 @@ public class EnderecoTest {
 		assertEquals("Sao Paulo", endereco.getCidade());
 	}
 
+	/**
+	 * Deve testar rua.
+	 */
 	@Test
 	public void deve_testar_rua() {
 		Endereco endereco = new Endereco();
@@ -53,6 +83,9 @@ public class EnderecoTest {
 
 	}
 
+	/**
+	 * Deve testar numero.
+	 */
 	@Test
 	public void deve_testar_numero() {
 		Endereco endereco = new Endereco();
@@ -60,6 +93,9 @@ public class EnderecoTest {
 		assertEquals("368", endereco.getNumero());
 	}
 
+	/**
+	 * Deve testar pais.
+	 */
 	@Test
 	public void deve_testar_pais() {
 		Endereco endereco = new Endereco();
@@ -68,6 +104,9 @@ public class EnderecoTest {
 
 	}
 
+	/**
+	 * Deve testar cep iguais.
+	 */
 	@Test
 	public void deve_testar_cep_iguais() {
 		Endereco endereco = new Endereco();
@@ -79,6 +118,9 @@ public class EnderecoTest {
 
 	}
 
+	/**
+	 * Deve testar cep diferentes.
+	 */
 	@Test
 	public void deve_testar_cep_diferentes() {
 		Endereco endereco = new Endereco();
@@ -89,6 +131,9 @@ public class EnderecoTest {
 		assertFalse(endereco.hashCode() == endereco2.hashCode());
 	}
 
+	/**
+	 * Deve testar endereco e funcionario.
+	 */
 	@Test
 	public void deve_testar_endereco_e_funcionario() {
 		Endereco endereco = new Endereco();
@@ -99,6 +144,9 @@ public class EnderecoTest {
 
 	}
 
+	/**
+	 * Testar tostring.
+	 */
 	@Test
 	public void testar_tostring() {
 		Endereco endereco = new Endereco();
@@ -106,6 +154,9 @@ public class EnderecoTest {
 		assertNotEquals("09340-070", endereco.toString());
 	}
 
+	/**
+	 * Testar doisobjetos.
+	 */
 	@Test
 	public void testar_doisobjetos() {
 		Endereco endereco = new Endereco();
@@ -113,6 +164,9 @@ public class EnderecoTest {
 		assertEquals(endereco, endereco1);
 	}
 
+	/**
+	 * Testar null.
+	 */
 	@Test
 	public void testar_null() {
 		Endereco endereco = new Endereco();
@@ -120,12 +174,18 @@ public class EnderecoTest {
 		assertNotEquals(endereco, endereco1);
 	}
 
+	/**
+	 * Nao deve retornar tostring nulo.
+	 */
 	@Test
 	public void nao_deve_retornar_tostring_nulo() {
 		Endereco endereco = new Endereco();
 		assertNotEquals(endereco.toString(), null);
 	}
 
+	/**
+	 * Deve testar cep 2.
+	 */
 	@Test
 	public void deve_testar_cep2() {
 		Endereco endereco = new Endereco();
@@ -137,6 +197,9 @@ public class EnderecoTest {
 
 	}
 
+	/**
+	 * Deve testar numero 2.
+	 */
 	@Test
 	public void deve_testar_numero2() {
 		Endereco endereco = new Endereco();
@@ -148,6 +211,9 @@ public class EnderecoTest {
 
 	}
 
+	/**
+	 * Deve testar numeros diferentes.
+	 */
 	@Test
 	public void deve_testar_numeros_diferentes() {
 		Endereco endereco = new Endereco();
@@ -159,6 +225,9 @@ public class EnderecoTest {
 
 	}
 	
+	/**
+	 * Teste fixturefactory.
+	 */
 	@Test
     public void teste_fixturefactory () {
         FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa.clienttemplate.loader");
@@ -169,6 +238,10 @@ public class EnderecoTest {
             System.out.println("Inválido");
         }
     }
+	
+	/**
+	 * Validation.
+	 */
 	@Test
     public void validation () {
         Endereco endereco = new Endereco(); 
@@ -178,8 +251,8 @@ public class EnderecoTest {
 
         Set<ConstraintViolation<Endereco>> violations = validator.validate(endereco);
 
-        if(!violations.isEmpty())
-            System.err.println("Existem documentos inválidos");
+        checkArgument(!violations.isEmpty(), "Existem documentos inválidos");
     }
+
 
 }

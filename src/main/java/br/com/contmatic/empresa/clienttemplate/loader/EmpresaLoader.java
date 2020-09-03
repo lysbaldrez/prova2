@@ -6,6 +6,10 @@ import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
 
 public class EmpresaLoader implements TemplateLoader {
+    
+    /**
+     * Load.
+     */
     @Override
     public void load () {
         Fixture.of(Empresa.class).addTemplate("empresa", new Rule(){{
