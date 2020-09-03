@@ -8,6 +8,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -244,7 +245,6 @@ public class EmpresaTest {
 		empresa.setCnpj("26870272/0001-36");
 		Empresa empresa2 = new Empresa();
 		empresa2.setCnpj("26870272/0001-36");
-		assertThat(empresa.equals(empresa2), is(true));
 		assertTrue(empresa.hashCode() == empresa2.hashCode());
 
 	}
@@ -384,6 +384,34 @@ public class EmpresaTest {
 	    
 	}
 
+	@Test
+    public void nao_deve_adicionar_enderecos_iguais() {
+	    empresa.setEnderecos(new HashSet<Endereco>() );
+        Endereco endereco1 = new Endereco();       
+        endereco1.setCep("04304010");
+        endereco1.setNumero("539");
+        empresa.getEnderecos().add(endereco1);
+        Endereco endereco2 = new Endereco ();
+        endereco2.setCep("04304010");
+        endereco2.setNumero("539");
+        empresa.getEnderecos().add(endereco2);
+        assertThat(empresa.getEnderecos().size(), is(1));
+        
+    }
+	@Test
+    public void nao_deve_adicionar_enderecos_diferentes() {
+        empresa.setEnderecos(new HashSet<Endereco>() );
+        Endereco endereco1 = new Endereco();       
+        endereco1.setCep("04304010");
+        endereco1.setNumero("539");
+        empresa.getEnderecos().add(endereco1);
+        Endereco endereco2 = new Endereco ();
+        endereco2.setCep("04304050");
+        endereco2.setNumero("975");
+        empresa.getEnderecos().add(endereco2);
+        assertThat(empresa.getEnderecos().size(), is(2));
+        
+    }
     
 	
 }

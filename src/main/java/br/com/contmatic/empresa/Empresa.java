@@ -3,6 +3,7 @@ package br.com.contmatic.empresa;
 import java.util.HashSet;
 import org.joda.time.*;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Future;
@@ -80,7 +81,7 @@ public class Empresa {
     private String site;
     
     /** The enderecos. */
-    private HashSet <Endereco> enderecos;
+    private Set<Endereco> enderecos;
     
     /** The dia cadastro. */
     @Future
@@ -389,5 +390,13 @@ public class Empresa {
     @Override
     public String toString() {
         return "Empresa [nome=" + nome + ", cnpj=" + cnpj + ", tipoDeEmpresa=" + tipoDeEmpresa + ", porteDaEmpresa=" + porteDaEmpresa + ", funcionarios=" + funcionarios + "]";
+    }
+
+    public Set<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(Set<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 }
