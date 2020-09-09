@@ -83,6 +83,8 @@ public class Empresa {
     /** The enderecos. */
     private Set<Endereco> enderecos;
     
+    private Set<Telefone> telefones;
+    
     /** The dia cadastro. */
     @Future
     private DateTime diaCadastro;
@@ -344,6 +346,23 @@ public class Empresa {
         this.site = site;
     }
 
+    public Set<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(Set<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    
+    public Set<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(Set<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
     /**
      * Hash code.
      *
@@ -392,11 +411,5 @@ public class Empresa {
         return "Empresa [nome=" + nome + ", cnpj=" + cnpj + ", tipoDeEmpresa=" + tipoDeEmpresa + ", porteDaEmpresa=" + porteDaEmpresa + ", funcionarios=" + funcionarios + "]";
     }
 
-    public Set<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(Set<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
+    
 }

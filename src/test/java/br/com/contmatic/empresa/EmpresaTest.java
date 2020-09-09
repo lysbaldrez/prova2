@@ -358,14 +358,12 @@ public class EmpresaTest {
 	 * Teste fixturefactory.
 	 */
 	@Test
-	public void teste_fixturefactory () {
+	public void garantir_set_vazio () {
 	    FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa.clienttemplate.loader");
         Empresa empresa = Fixture.from(Empresa.class).gimme("empresa");
         javax.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<Empresa>> violations = validator.validate(empresa);
-        if (!violations.isEmpty()) {
-            System.out.println("Inválido");
-        }
+        checkArgument(!violations.isEmpty(), "Existem documentos inválidos");
 	}
 	
 	/**
@@ -399,7 +397,7 @@ public class EmpresaTest {
         
     }
 	@Test
-    public void nao_deve_adicionar_enderecos_diferentes() {
+    public void deve_adicionar_enderecos_diferentes() {
         empresa.setEnderecos(new HashSet<Endereco>() );
         Endereco endereco1 = new Endereco();       
         endereco1.setCep("04304010");
@@ -412,6 +410,37 @@ public class EmpresaTest {
         assertThat(empresa.getEnderecos().size(), is(2));
         
     }
-    
+	@Test
+    public void nao_deve_adicionar_telefones_iguais() {
+        empresa.setTelefones(new HashSet<Telefone>() );      
+        Telefone telefone = new Telefone ();
+        telefone.setDdd("11");
+        telefone.setNumero("973004642");
+        telefone.setTipoDoTelefone("Celular");
+        empresa.getTelefones().add(telefone);
+        Telefone telefone1 = new Telefone ();
+        telefone1.setDdd("11");
+        telefone1.setNumero("973004642");
+        telefone1.setTipoDoTelefone("Celular");
+        empresa.getTelefones().add(telefone1);       
+        assertThat(empresa.getTelefones().size(), is(1));
+        
+    }
+	@Test
+    public void deve_adicionar_telefones_diferentes() {
+        empresa.setTelefones(new HashSet<Telefone>() );
+        Telefone telefone = new Telefone();       
+        telefone.setDdd("11");
+        telefone.setNumero("973004642");
+        telefone.setTipoDoTelefone("Celular");
+        empresa.getTelefones().add(telefone);
+        Telefone telefone1 = new Telefone ();
+        telefone1.setDdd("21");
+        telefone1.setNumero("942769870");
+        telefone1.setTipoDoTelefone("Celular");
+        empresa.getTelefones().add(telefone1);
+        assertThat(empresa.getTelefones().size(), is(2));
+        
+    }
 	
 }

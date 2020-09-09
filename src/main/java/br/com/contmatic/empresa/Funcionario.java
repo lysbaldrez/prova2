@@ -20,8 +20,8 @@ public class Funcionario {
 	private String nome;
     
     /** The idade. */
-    @Min(value = 18, message = "Age should not be less than 18")
-    @Max(value = 150, message = "Age should not be greater than 150")
+    @Min(value = 18, message = "A idade não pode ser menor que 18.")
+    @Max(value = 150, message = "A idade não pode ser maior que 150.")
 	private String idade;
 	
 	/** The cpf. */
