@@ -125,17 +125,6 @@ public class EmpresaTest {
 	}
 
 	/**
-	 * Deve testar telefone.
-	 */
-	@Test
-	public void deve_testar_telefone() {
-		empresa = new Empresa();
-		empresa.setTelefone("(0011) 6942-9811");
-		assertEquals("(0011) 6942-9811", empresa.getTelefone());
-
-	}
-
-	/**
 	 * Deve testar situacao cadastral.
 	 */
 	@Test

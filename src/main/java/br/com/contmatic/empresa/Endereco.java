@@ -18,21 +18,24 @@ public class Endereco {
 
     /** The logradouro. */
     @Valid
+    @Pattern(regexp = "^[A-ZÀ-Úa-zà-ú0-9]{0,1}[A-ZÀ-Ú a-zà-ú_0-9]{0,10}[A-ZÀ-Úa-zà-ú0-9]{0,1}$", message = "O complemento deve ter até 8 caracteres alfanumericos")
 	private String logradouro;
 	
 	/** The numero. */
-	@NotEmpty
+	@NotNull (message = "Número não pode ser nulo")
 	private String numero;
 	
 	/** The cidade. */
-	@NotBlank
+	@NotBlank(message = "Não deve aceitar cidade nula nem vazia")
 	private String cidade;
 	
 	/** The pais. */
+	 @Pattern(regexp = "^[A-ZÀ-Úa-zà-ú][A-ZÀ-Ú a-zà-ú]{0,48}", message = "O país deve ter até 50 caracteres alfanumericos")
 	private String pais;
 	
 	/** The cep. */
-	@NotNull
+	 @Pattern(regexp = "\\d{8}", message = "O CEP deve conter somente 8 digítos numéricos")
+	@NotNull (message = "Não deve conter CEP nulo")
 	private String cep;
 
 	/**

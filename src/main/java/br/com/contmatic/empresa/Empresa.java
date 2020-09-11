@@ -1,25 +1,20 @@
 package br.com.contmatic.empresa;
 
-import java.util.HashSet;
-import org.joda.time.*;
 import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.joda.time.DateTime;
@@ -32,30 +27,33 @@ public class Empresa {
     
 
     /** The nome. */
+   
     @NotBlank(message = "Nome não pode estar em branco")
+    @Pattern(regexp = "\\d{15}", message = "O nome deve conter até 15 caracteres")
     private String nome;
     
     /** The nome fantasia. */
     @Size(min = 10, max = 200, message 
-            = "About Me must be between 10 and 200 characters")
+            = "O nome fantasia tem que ter 10 caracteres mínimos e 200 máximos.")
     private String nomeFantasia;
     
     /** The cnpj. */
+    @Pattern(regexp = "\\d{11}", message = "O CNPJ deve conter somente 11 digítos numéricos")
     @CNPJ
     private String cnpj;
     
     /** The tipo de empresa. */
     @Length(min = 3, max = 15)
+    @Pattern(regexp = "^['A-ZÀ-Úa-zà-ú0-9!@#$%&*-+_§.,;]", message = "Tipo de empresa inválido")
     private String tipoDeEmpresa;
     
     /** The porte da empresa. */
-    @Null
-    @Range(min=0, max=0)
-    @Range(min=15, max = 80)
+   @NotNull(message = "Porte da empresa não pode ser nulo")
+   @Pattern(regexp = "^['A-ZÀ-Úa-zà-ú0-9!@#$%&*-+_§.,;]", message = "Porte da empresa inválido")
     private String porteDaEmpresa;
     
     /** The funcionarios. */
-    @NotNull
+    @NotNull (message = "Lista de funcionários não pode ser nula")
     private List<Funcionario> funcionarios;
     
     /** The situacao cadastral. */
@@ -63,26 +61,29 @@ public class Empresa {
     private String situacaoCadastral;
     
     /** The data. */
+    @NotEmpty(message = "Não deve aceitar data nula nem vazia")
     private String data;
     
-    /** The telefone. */
-    @NotEmpty
-    private String telefone;
     
     /** The email. */
+    @Pattern(regexp = "^['A-ZÀ-Úa-zà-ú!*¨$;]", message = "Email inválido")
     @Email
     private String email;
     
     /** The situacao especial. */
+    @Pattern(regexp = "^['A-ZÀ-Úa-zà-ú0-9!@#$%&*-+_§.,;]", message = "Situação especial inválida")
     private String situacaoEspecial; 
     
     /** The site. */
+    @NotNull(message = "Site não pode ser nulo")
     @URL
     private String site;
     
     /** The enderecos. */
+    @NotNull(message = "Não deve aceitar endereco nulo")
     private Set<Endereco> enderecos;
     
+    @NotNull(message = "Não deve aceitar telefone nulo")
     private Set<Telefone> telefones;
     
     /** The dia cadastro. */
@@ -161,24 +162,6 @@ public class Empresa {
      */
     public void setData(String data) {
         this.data = data;
-    }
-
-    /**
-     * Gets the telefone.
-     *
-     * @return the telefone
-     */
-    public String getTelefone() {
-        return telefone;
-    }
-
-    /**
-     * Sets the telefone.
-     *
-     * @param telefone the new telefone
-     */
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     /**

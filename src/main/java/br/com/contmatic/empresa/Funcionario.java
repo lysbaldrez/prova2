@@ -4,6 +4,8 @@ package br.com.contmatic.empresa;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -16,7 +18,7 @@ import org.hibernate.validator.constraints.br.CPF;
 public class Funcionario {
     
     /** The nome. */
-    @NotBlank(message = "Nome não pode estar em branco")
+    @NotBlank(message = "Nome não pode estar nulo ou vazio")
 	private String nome;
     
     /** The idade. */
@@ -26,6 +28,7 @@ public class Funcionario {
 	
 	/** The cpf. */
 	@CPF
+	@NotNull(message = "CPF não pode ser nulo")
 	private String cpf;
 	
 	/** The cargo. */
