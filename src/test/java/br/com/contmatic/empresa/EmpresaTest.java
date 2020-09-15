@@ -19,6 +19,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.contmatic.empresa.valida.EmpresaValida;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 
@@ -344,18 +345,6 @@ public class EmpresaTest {
     }
 	
 	/**
-	 * Teste fixturefactory.
-	 */
-	@Test
-	public void garantir_set_vazio () {
-	    FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa.clienttemplate.loader");
-        Empresa empresa = Fixture.from(Empresa.class).gimme("empresa");
-        javax.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<Empresa>> violations = validator.validate(empresa);
-        checkArgument(!violations.isEmpty(), "Existem documentos inválidos");
-	}
-	
-	/**
 	 * Validation.
 	 */
 	@Test
@@ -430,6 +419,24 @@ public class EmpresaTest {
         empresa.getTelefones().add(telefone1);
         assertThat(empresa.getTelefones().size(), is(2));
         
+    }
+	
+	@Test 
+	public void nao_deve_adicionar_nome_com_numero () {
+	    empresa.setNome("Joao 2");
+	    assertFalse(EmpresaValida.valida(empresa));
+	}
+	
+	@Test 
+    public void nao_deve_adicionar_cnpj_com_espaco () {
+        empresa.setCnpj("24.835.989  /  0001-11");
+        assertFalse(EmpresaValida.valida(empresa));
+    }
+	
+	@Test 
+    public void nao_deve_adicionar_cnpj_com_letras () {
+        empresa.setCnpj("24.835.989/jo0001-11 ");
+        assertFalse(EmpresaValida.valida(empresa));
     }
 	
 }

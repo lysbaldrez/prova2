@@ -8,12 +8,15 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import br.com.contmatic.empresa.valida.EnderecoValida;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 
@@ -23,7 +26,19 @@ import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EnderecoTest {
-
+    
+    private Endereco endereco;
+    
+    @Before
+    public final void setup ( ) {
+        endereco = new Endereco ();
+    }
+    
+    @After
+    public final void tearDown () {
+        endereco = null;
+    }
+    
 	/**
 	 * Before.
 	 */
@@ -254,5 +269,13 @@ public class EnderecoTest {
         checkArgument(!violations.isEmpty(), "Existem documentos inválidos");
     }
 
+	
+	 @Test
+	    public void nao_deve_aceitar_logradouro_com_caracteres_especiais() {
+	        endereco.setLogradouro("Rua Costa & Silva");
+	        assertFalse(EnderecoValida.valida(endereco));
+	        
+	    }
 
+	 
 }

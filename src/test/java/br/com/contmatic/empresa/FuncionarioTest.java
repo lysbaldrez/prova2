@@ -8,10 +8,13 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import br.com.contmatic.empresa.valida.EmpresaValida;
+import br.com.contmatic.empresa.valida.FuncionarioValida;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 
@@ -27,6 +30,9 @@ public class FuncionarioTest {
      * @param b the b
      * @param string the string
      */
+    
+    private Funcionario funcionario;
+    
     private void checkArgument(boolean b, String string) {
         // TODO Auto-generated method stub
         
@@ -39,8 +45,13 @@ public class FuncionarioTest {
     public final void setUp() {
         FixtureFactoryLoader.loadTemplates("br.com.contmatic.empresa.clienttemplate.loader");
         Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
+        funcionario = new Funcionario ();
     }
     
+    @After
+    public final void tearDown () {
+        funcionario  = null;
+    }
 	/**
 	 * Deve testar nome.
 	 */
@@ -252,4 +263,10 @@ public class FuncionarioTest {
         checkArgument(!violations.isEmpty(), "Existem documentos inválidos");
 
 	}
+	
+	@Test 
+    public void nao_deve_adicionar_cargo_com_numero () {
+        funcionario.setCargo("Joao 2");
+        assertFalse(FuncionarioValida.valida(funcionario));
+    }
 }
